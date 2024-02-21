@@ -29,7 +29,8 @@ def receive_messages(client_socket):
             header, data = split_frame(frame)
             to_username, file_name = header.decode().split(":")
             name, extension = file_name.split(".")
-            file_name = f"{name}_{to_username}.{extension}"
+            name = "Output" #Here you can take a user input for personalised name 
+            file_name = f"{name}.{extension}"
             with open(file_name, "ab") as file:
                 file.write(data)
 
@@ -67,4 +68,3 @@ receive_thread.start()
 
 send_thread = threading.Thread(target=send_messages, args=(client_socket,))
 send_thread.start()
-
